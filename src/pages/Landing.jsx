@@ -13,8 +13,15 @@ function Landing() {
 
       <section className="">
         <h1 className="text-3xl text-center"><br />Missed class?<br />Missed nothing.</h1>
-        <p className="text-center m-5 mx-auto px-6 max-w-100">Lectify turns recorded lectures into clean, structured notes, with assignments, quizzex and exam tips pulled out for you</p>
-        <h2 className="text-center font-medium">Get Started. It's free!</h2>
+        <p className="text-center text-sm m-5 mx-auto px-6 max-w-100">Lectify turns recorded lectures into clean, structured notes, with assignments, quizzes and exam tips pulled out for you</p>
+        <div className="text-center font-medium text-sm "><Link to="/signup" className="bg-secondary active:bg-teal-700 text-white px-4 py-2 rounded-3xl">Get Started. It's Free! </Link></div>
+        <p className="text-center text-3xl m-10 mx-auto  px-6 max-w-100">Built for students</p>
+      </section>
+
+      <section>
+        <div className="flex justify-center">
+          <div className="w-60 aspect-414/896 border-gray-900 border-2 rounded-3xl bg-gray-200"></div>
+        </div>
       </section>
     </>
   )
