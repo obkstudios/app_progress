@@ -4,6 +4,7 @@ import { appName } from "../config"
 function Landing() {
   return (
     <>
+      {/* Navbar */}
       <div>
         <nav className="flex justify-between items-center p-5">
           <div className="text-xl text-primary font-bold">{appName}</div>
@@ -11,6 +12,7 @@ function Landing() {
         </nav>
       </div>
 
+      {/* Hero Section */}
       <section className="">
         <h1 className="text-3xl text-center"><br />Missed class?<br />Missed nothing.</h1>
         <p className="text-center text-sm m-5 mx-auto px-6 max-w-100">Lectify turns recorded lectures into clean, structured notes, with assignments, quizzes and exam tips pulled out for you</p>
@@ -29,7 +31,7 @@ function Landing() {
 
       {/* How it works */}
       <section>
-        <h2 className="text-2xl font-medium mt-10 ml-5">How it works</h2>
+        <h2 className="text-2xl font-bold mt-10 ml-5">How it works</h2>
         <div className="flex flex-col justify-center text-center gap-y-6">
           <div>
             <p className="m-4 font-bold">1. Record</p>
@@ -48,6 +50,19 @@ function Landing() {
         </div>
       </section>
 
+      {/* For Students */}
+      <section className="">
+        <div className="w-90 h-80 bg-amber-100 rounded-3xl my-20 mx-auto">
+          <div className="p-10">
+            <div className="mb-5">For Everyone</div>
+            <li>All your courses in one place<span class="text-green-500 font-bold text-xl">&#x2713;</span></li>
+            <li>Notes from every lecture, organized by date</li>
+            <li>Choose from options of Brief, Standard, or Detailed notes</li>
+            <li>Assignments and deadlines pulled out for you</li>
+            <li>Share notes to your WhatsApp group</li>
+          </div>
+        </div>
+      </section>
 
     </>
   )
