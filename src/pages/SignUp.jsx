@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import { programs } from "./programs"
 import { appName } from "../config"
 
 function SignUpForm() {
@@ -14,15 +15,22 @@ function SignUpForm() {
     e.preventDefault() // stops the page from reloading
   }
 
+  const matchingPrograms = programs.filter((programName) => {
+    return programName.toLowerCase().includes(program.toLowerCase())
+  })
+
   return (
     <div className="flex justify-center items-center min-h-screen  bg-[#fdfaf3] ">
       <form onSubmit={handleSubmit} className="w-full max-w-2xl rounded-4xl bg-white border border-[#1e1b4b]/10 p-8 shadow-sm">
+
+        {/* Header */}
         <div className="m-5">
-          <h1 className="text-3xl font-bold text-[#1e1b4b]">Create your Lectify account</h1>
-
-
+          <h1 className="text-3xl font-bold text-[#1e1b4b]">Create your {appName} account</h1>
           <p className="text-sm italic mb-5 ">Tell us a little about yourself so we can organize your Lectify experience</p>
         </div>
+
+        {/* forms */}
+        {/* name */}
         <div className="mx-auto w-full max-w-md">
           <div className="mb-4">
             <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="full-name">Full Name </label>
@@ -35,6 +43,7 @@ function SignUpForm() {
               placeholder="Full Name" />
           </div>
 
+          {/* email */}
           <div className="mb-4 ">
             <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="email">Email </label>
             <input
@@ -46,6 +55,7 @@ function SignUpForm() {
               placeholder="example@gmail.com" />
           </div>
 
+          {/* password */}
           <div className="mb-4">
             <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="password">Password </label>
             <input
@@ -57,6 +67,7 @@ function SignUpForm() {
               placeholder="Password" />
           </div>
 
+          {/* university */}
           <div className="mb-4">
             <label className="block text-lg font-semibold text-[#1e1b4b] mb-1" htmlFor="university">University</label>
             <select
@@ -70,6 +81,7 @@ function SignUpForm() {
             </select>
           </div>
 
+          {/* programme */}
           <div className="mb-4">
             <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="program">Programme of Study </label>
             <input
@@ -79,6 +91,9 @@ function SignUpForm() {
               value={program}
               onChange={(e) => setProgram(e.target.value)}
             />
+            {matchingPrograms.map((programName) => {
+              return <p>{programName}</p>
+            })}
           </div>
 
           <div className="mb-4">
