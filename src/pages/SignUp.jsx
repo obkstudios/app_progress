@@ -1,59 +1,116 @@
 import { Link } from "react-router-dom"
+import { useState } from "react"
 import { appName } from "../config"
 
 function SignUpForm() {
+  const [fullName, setFullName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [university, setUniversity] = useState("KNUST")
+  const [year, setYear] = useState("")
+  const [program, setProgram] = useState("")
+
+  function handleSubmit(e) {
+    e.preventDefault() // stops the page from reloading
+  }
+
   return (
-    <form className="flex flex-row">
-      <div className="mb-4">
-        <label className="block" htmlFor="full-name">Full Name </label>
-        <input type="text" id="full-name" className="border w-full rounded-lg max-w-md px-4 py-1" />
-      </div>
+    <div className="flex justify-center items-center min-h-screen  bg-[#fdfaf3] ">
+      <form onSubmit={handleSubmit} className="w-full max-w-2xl rounded-4xl bg-white border border-[#1e1b4b]/10 p-8 shadow-sm">
+        <div className="m-5">
+          <h1 className="text-3xl font-bold text-[#1e1b4b]">Create your Lectify account</h1>
 
-      <div className="mb-4">
-        <label className="block" htmlFor="email">Email </label>
-        <input type="email" id="email" className="border w-full rounded-lg max-w-md px-4 py-1" />
-      </div>
 
-      <div className="mb-4">
-        <label className="block" htmlFor="password">Password </label>
-        <input type="password" id="password" className="border w-full rounded-lg max-w-md px-4 py-1" />
-      </div>
+          <p className="text-sm italic mb-5 ">Tell us a little about yourself so we can organize your Lectify experience</p>
+        </div>
+        <div className="mx-auto w-full max-w-md">
+          <div className="mb-4">
+            <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="full-name">Full Name </label>
+            <input
+              type="text"
+              id="full-name"
+              value={fullName}
+              className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="Full Name" />
+          </div>
 
-      <div className="mb-4">
-        <label className="block mb-1" htmlFor="university">University</label>
-        <select id="university" className="w-full border rounded-lg px-4 max-w-md py-1">
-          <option value="KNUST">KNUST</option>
-        </select>
-      </div>
+          <div className="mb-4 ">
+            <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="email">Email </label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="example@gmail.com" />
+          </div>
 
-      <div className="mb-4">
-        <label className="block" htmlFor="program">Programme of Study </label>
-        <input type="text" id="program" className="border w-full rounded-lg max-w-md px-4 py-1" />
-      </div>
+          <div className="mb-4">
+            <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="password">Password </label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password" />
+          </div>
 
-      <div className="mb-4">
-        <label className="block" htmlFor="year">Current Year of Study</label>
-        {/* <input type="text" id="year" className="border w-full rounded-lg max-w-md px-4 py-1" /> */}
-        <select id="university" className="w-full border rounded-lg px-4 max-w-md py-1">
-          <option value=""></option>
-          <option value="year-1">Year 1</option>
-          <option value="year-2">Year 2</option>
-          <option value="year-3">Year 3</option>
-          <option value="year-4">Year 4</option>
-          <option value="year-5">Year 5</option>
-          <option value="year-6">Year 6</option>
-        </select>
-      </div>
+          <div className="mb-4">
+            <label className="block text-lg font-semibold text-[#1e1b4b] mb-1" htmlFor="university">University</label>
+            <select
+              id="university"
+              className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
+              value={university}
+              onChange={(e) => setUniversity(e.target.value)}
+            >
+              <option value="" disabled>Select your university</option>
+              <option value="KNUST">KNUST</option>
+            </select>
+          </div>
 
-      <button className="w-full border rounded-lg px-4 max-w-md py-1 bg-amber-400">
-        Sign Up
-      </button>
+          <div className="mb-4">
+            <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="program">Programme of Study </label>
+            <input
+              type="text"
+              id="program"
+              className=" border-[#1e1b4b]/50 border-2  w-full rounded-3xl px-4 py-2"
+              value={program}
+              onChange={(e) => setProgram(e.target.value)}
+            />
+          </div>
 
-      <div>
-        <p>Have an account?</p>
-        <Link to="/Login">Log In</Link>
-      </div>
-    </form>
+          <div className="mb-4">
+            <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="year">Current Year of Study</label>
+            {/* <input type="text" id="year" className="border w-full rounded-lg max-w-md px-4 py-1" /> */}
+            <select
+              id="year"
+              className="w-full border-[#1e1b4b]/50 border-2 rounded-3xl px-4 py-2"
+              value={year}
+              onChange={(e) => setYear(e.target.value)}
+            >
+              <option value="" disabled>Select your year</option>
+              <option value="year-1">Year 1</option>
+              <option value="year-2">Year 2</option>
+              <option value="year-3">Year 3</option>
+              <option value="year-4">Year 4</option>
+              <option value="year-5">Year 5</option>
+              <option value="year-6">Year 6</option>
+            </select>
+          </div>
+
+          <button className="w-full rounded-3xl px-4 py-2 mt-5 bg-amber-400 text-lg font-semibold border-[#1e1b4b]/50 border-2 text-[#1e1b4b]">
+            Sign Up
+          </button>
+
+          <div className="flex justify-center m-5">
+            <p className="mr-1">Have an account?</p>
+            <Link to="/Login" className="text-blue-900 font-medium">Log In</Link>
+          </div>
+        </div>
+      </form>
+    </div>
   )
 }
 
