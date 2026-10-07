@@ -167,7 +167,7 @@ function Landing() {
           <div className="flex flex-col rounded-3xl bg-white p-8 shadow-xl ring-2 ring-[#f59e0b]">
             <h3 className="text-lg font-semibold text-[#1e1b4b]">For Contributors</h3>
             <p className="mt-3 text-4xl font-extrabold text-[#1e1b4b]">Free <span className="text-sm font-medium text-[#f59e0b]">· Approved after signup</span></p>
-            <p className="mt-6 text-sm font-medium text-[#1e1b4b]/60">Everything in Listener, plus</p>
+            <p className="mt-2 text-sm font-medium text-[#1e1b4b]/60">Everything in Listener, plus</p>
             <ul className="mt-3 flex flex-col gap-3 text-sm">
               <li className="flex gap-3 text-[#1e1b4b]/80">
                 <svg className="h-5 w-5 shrink-0 mt-0.5 text-[#f59e0b]" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fillRule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clipRule="evenodd" /></svg>
