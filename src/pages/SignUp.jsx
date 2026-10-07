@@ -4,15 +4,26 @@ import { programs } from "./programs"
 import { appName } from "../config"
 
 function SignUpForm() {
+
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [university, setUniversity] = useState("KNUST")
   const [year, setYear] = useState("")
   const [program, setProgram] = useState("")
+  const [showSuggestions, setShowSuggestions] = useState(false)
 
   function handleSubmit(e) {
-    e.preventDefault() // stops the page from reloading
+    e.preventDefault(); // stops the page from reloading
+    const formData = {
+      fullName: fullName,
+      email: email,
+      password: password,
+      university: university,
+      year: year,
+      program: program,
+    }
+    console.log(formData)
   }
 
   const matchingPrograms = programs.filter((programName) => {
@@ -89,11 +100,25 @@ function SignUpForm() {
               id="program"
               className=" border-[#1e1b4b]/50 border-2  w-full rounded-3xl px-4 py-2"
               value={program}
-              onChange={(e) => setProgram(e.target.value)}
+              onChange={(e) => { setProgram(e.target.value); setShowSuggestions(true) }}
             />
-            {matchingPrograms.map((programName) => {
-              return <p>{programName}</p>
-            })}
+            {program !== "" && showSuggestions && (
+              matchingPrograms.length > 0 ? (
+                matchingPrograms.map((programName) =>
+                (<p
+                  key={programName}
+                  onClick={() => {
+                    setProgram(programName);
+                    setShowSuggestions(false)
+                  }}
+                >
+                  {programName}
+                </p>)
+                )
+              ) : (
+                <p>No matching programme found</p>
+              )
+            )}
           </div>
 
           <div className="mb-4">

@@ -34,9 +34,9 @@ function Landing() {
       <section className="px-5 pb-16">
         <div className="flex items-center justify-center">
           {/* <!-- iPhone 15 Container --> */}
-          <div className="relative h-[520px] w-64 rounded-[45px] border-8 border-[#1e1b4b] bg-[#1e1b4b] shadow-2xl shadow-[#1e1b4b]/25 sm:h-[600px] sm:w-72">
+          <div className="relative h-130 w-64 rounded-[45px] border-8 border-[#1e1b4b] bg-[#1e1b4b] shadow-2xl shadow-[#1e1b4b]/25 sm:h-150 sm:w-72">
             {/* <!-- Dynamic Island --> */}
-            <div className="absolute top-2 left-1/2 z-20 h-[22px] w-[90px] -translate-x-1/2 rounded-full bg-[#1e1b4b]"></div>
+            <div className="absolute top-2 left-1/2 z-20 h-5.5 w-22.5 -translate-x-1/2 rounded-full bg-[#1e1b4b]"></div>
 
             {/* <!-- Screen Content --> */}
             <div className="relative flex h-full w-full flex-col gap-3 overflow-hidden rounded-[37px] bg-[#fdfaf3] px-5 pt-12" aria-hidden="true">
@@ -65,16 +65,16 @@ function Landing() {
 
             {/* <!-- Left Side Buttons --> */}
             {/* <!-- Silent Switch --> */}
-            <div className="absolute left-[-14px] top-20 h-8 w-[6px] rounded-l-md bg-[#1e1b4b]"></div>
+            <div className="absolute -left-3.5 top-20 h-8 w-1.5 rounded-l-md bg-[#1e1b4b]"></div>
 
             {/* <!-- Volume Up --> */}
-            <div className="absolute left-[-14px] top-36 h-12 w-[6px] rounded-l-md bg-[#1e1b4b]"></div>
+            <div className="absolute -left-3.5 top-36 h-12 w-1.5 rounded-l-md bg-[#1e1b4b]"></div>
 
             {/* <!-- Volume Down --> */}
-            <div className="absolute left-[-14px] top-52 h-12 w-[6px] rounded-l-md bg-[#1e1b4b]"></div>
+            <div className="absolute -left-3.5 top-52 h-12 w-1.5 rounded-l-md bg-[#1e1b4b]"></div>
 
             {/* <!-- Right Side Button (Power) --> */}
-            <div className="absolute right-[-14px] top-36 h-16 w-[6px] rounded-r-md bg-[#1e1b4b]"></div>
+            <div className="absolute -right-3.5 top-36 h-16 w-1.5 rounded-r-md bg-[#1e1b4b]"></div>
           </div>
         </div>
       </section>
