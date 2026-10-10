@@ -1,17 +1,36 @@
 import { Link } from "react-router-dom"
 import { useState } from "react"
+import { useEffect } from "react"
 import { programs } from "./programs"
 import { appName } from "../config"
+import { supabase } from "../lib/supabase"
 
 function SignUpForm() {
 
   const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [university, setUniversity] = useState("KNUST")
+  const [university, setUniversity] = useState("")
+  const [uniList, setUniList] = useState([])
   const [year, setYear] = useState("")
   const [program, setProgram] = useState("")
   const [showSuggestions, setShowSuggestions] = useState(false)
+
+  useEffect(() => {
+    async function fetchUni() {
+      const { data, error } = await supabase.from("universities").select("id, name")
+      console.log("Universities:", data)
+
+      if (error) {
+        console.log(error)
+        return
+      }
+      setUniList(data)
+
+
+    }
+    fetchUni();
+  }, [])
 
   function handleSubmit(e) {
     e.preventDefault(); // stops the page from reloading
@@ -20,7 +39,7 @@ function SignUpForm() {
       email: email,
       password: password,
       university: university,
-      year: year,
+      year: Number(year),
       program: program,
     }
     console.log(formData)
@@ -88,7 +107,14 @@ function SignUpForm() {
               onChange={(e) => setUniversity(e.target.value)}
             >
               <option value="" disabled>Select your university</option>
-              <option value="KNUST">KNUST</option>
+              {uniList.map((uni) =>
+                <option
+                  key={uni.id}
+                  value={uni.id}
+                >
+                  {uni.name}
+                </option>
+              )}
             </select>
           </div>
 
@@ -131,12 +157,12 @@ function SignUpForm() {
               onChange={(e) => setYear(e.target.value)}
             >
               <option value="" disabled>Select your year</option>
-              <option value="year-1">Year 1</option>
-              <option value="year-2">Year 2</option>
-              <option value="year-3">Year 3</option>
-              <option value="year-4">Year 4</option>
-              <option value="year-5">Year 5</option>
-              <option value="year-6">Year 6</option>
+              <option value="1">Year 1</option>
+              <option value="2">Year 2</option>
+              <option value="3">Year 3</option>
+              <option value="4">Year 4</option>
+              <option value="5">Year 5</option>
+              <option value="6">Year 6</option>
             </select>
           </div>
 
