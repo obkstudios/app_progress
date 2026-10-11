@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom"
-import { useState } from "react"
-import { useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 import { programs } from "./programs"
 import { appName } from "../config"
 import { supabase } from "../lib/supabase"
@@ -15,6 +14,7 @@ function SignUpForm() {
   const [year, setYear] = useState("")
   const [program, setProgram] = useState("")
   const [showSuggestions, setShowSuggestions] = useState(false)
+  const [signUpMessage, setSignUpMessage] = useState("")
 
   useEffect(() => {
     async function fetchUni() {
@@ -32,8 +32,10 @@ function SignUpForm() {
     fetchUni();
   }, [])
 
+  const navigate = useNavigate();
+
   function handleSubmit(e) {
-    e.preventDefault(); // stops the page from reloading
+    e.preventDefault()
     const formData = {
       fullName: fullName,
       email: email,
@@ -42,7 +44,31 @@ function SignUpForm() {
       year: Number(year),
       program: program,
     }
-    console.log(formData)
+    supabaseSignUp(formData)
+  }
+
+  async function supabaseSignUp(formData) {
+    const { data, error } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+      options: {
+        data: {
+          full_name: formData.fullName,
+          university_id: formData.university,
+          year_group: formData.year,
+          program: formData.program
+        }
+      }
+    })
+    if (error) {
+      console.log(error.message)
+      return
+    }
+    if (!data.session) {
+      setSignUpMessage("Account created! Please check your email to confirm your account")
+    } else {
+      navigate("/login")
+    }
   }
 
   const matchingPrograms = programs.filter((programName) => {
@@ -57,6 +83,7 @@ function SignUpForm() {
         <div className="m-5">
           <h1 className="text-3xl font-bold text-[#1e1b4b]">Create your {appName} account</h1>
           <p className="text-sm italic mb-5 ">Tell us a little about yourself so we can organize your Lectify experience</p>
+          {signUpMessage && <p>{signUpMessage}</p>}
         </div>
 
         {/* forms */}
@@ -70,7 +97,7 @@ function SignUpForm() {
               value={fullName}
               className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
               onChange={(e) => setFullName(e.target.value)}
-              placeholder="Full Name" />
+              placeholder="Full Name" required />
           </div>
 
           {/* email */}
@@ -82,7 +109,7 @@ function SignUpForm() {
               value={email}
               className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="example@gmail.com" />
+              placeholder="example@gmail.com" required />
           </div>
 
           {/* password */}
@@ -94,7 +121,7 @@ function SignUpForm() {
               value={password}
               className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password" />
+              placeholder="Password" required />
           </div>
 
           {/* university */}
@@ -104,7 +131,7 @@ function SignUpForm() {
               id="university"
               className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
               value={university}
-              onChange={(e) => setUniversity(e.target.value)}
+              onChange={(e) => setUniversity(e.target.value)} required
             >
               <option value="" disabled>Select your university</option>
               {uniList.map((uni) =>
@@ -127,6 +154,7 @@ function SignUpForm() {
               className=" border-[#1e1b4b]/50 border-2  w-full rounded-3xl px-4 py-2"
               value={program}
               onChange={(e) => { setProgram(e.target.value); setShowSuggestions(true) }}
+              required
             />
             {program !== "" && showSuggestions && (
               matchingPrograms.length > 0 ? (
@@ -155,6 +183,7 @@ function SignUpForm() {
               className="w-full border-[#1e1b4b]/50 border-2 rounded-3xl px-4 py-2"
               value={year}
               onChange={(e) => setYear(e.target.value)}
+              required
             >
               <option value="" disabled>Select your year</option>
               <option value="1">Year 1</option>
@@ -166,8 +195,9 @@ function SignUpForm() {
             </select>
           </div>
 
-          <button className="w-full rounded-3xl px-4 py-2 mt-5 bg-amber-400 text-lg font-semibold border-[#1e1b4b]/50 border-2 text-[#1e1b4b]">
+          <button className="w-full flex justify-center transition-transform duration-150 ease-out hover:scale-[1.02] rounded-3xl px-4 py-2 mt-5 bg-amber-400 text-lg font-semibold border-[#1e1b4b]/50 border-2 text-[#1e1b4b]">
             Sign Up
+
           </button>
 
           <div className="flex justify-center m-5">

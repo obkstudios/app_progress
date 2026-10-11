@@ -135,7 +135,7 @@ function Landing() {
       {/* For Students */}
       <section className="bg-[#fdfaf3] px-5 pb-20">
         <div className="mx-auto max-w-4xl grid gap-6 md:grid-cols-2 md:items-stretch">
-          <div className="flex flex-col rounded-3xl bg-white border border-[#1e1b4b]/10 p-8 shadow-sm">
+          <div className="flex flex-col rounded-3xl transition-transform duration-150 ease-out hover:scale-[1.02] bg-white border border-[#1e1b4b]/10 p-8 shadow-sm">
             <h3 className="text-lg font-semibold text-[#1e1b4b]">For Listeners</h3>
             <p className="mt-3 text-4xl font-extrabold text-[#1e1b4b]">Free</p>
             <ul className="mt-6 flex flex-col gap-3 text-sm">
@@ -164,7 +164,7 @@ function Landing() {
           </div>
 
           {/* For Contributors */}
-          <div className="flex flex-col rounded-3xl bg-white p-8 shadow-xl ring-2 ring-[#f59e0b]">
+          <div className="flex flex-col rounded-3xl transition-transform duration-150 ease-out hover:scale-[1.02] bg-white p-8 shadow-xl ring-2 ring-[#f59e0b]">
             <h3 className="text-lg font-semibold text-[#1e1b4b]">For Contributors</h3>
             <p className="mt-3 text-4xl font-extrabold text-[#1e1b4b]">Free <span className="text-sm font-medium text-[#f59e0b]">· Approved after signup</span></p>
             <p className="mt-2 text-sm font-medium text-[#1e1b4b]/60">Everything in Listener, plus</p>
@@ -186,7 +186,7 @@ function Landing() {
                 <span>Get notified the moment your notes are ready to review</span>
               </li>
             </ul>
-            <Link to="/signup" className="mt-8 block rounded-full bg-[#f59e0b] py-3 text-center font-semibold text-[#1e1b4b] hover:bg-[#fbbf24] transition-colors">Sign up</Link>
+            <Link to="/signup" className="mt-8 block rounded-full bg-[#f59e09] py-3 text-center font-semibold text-white hover:bg-[#fbbf24] transition-colors">Sign up</Link>
           </div>
         </div>
       </section>
