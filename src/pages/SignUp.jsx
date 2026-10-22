@@ -57,7 +57,8 @@ function SignUpForm() {
           university_id: formData.university,
           year_group: formData.year,
           program: formData.program
-        }
+        },
+        emailRedirectTo: "http://localhost:5173/login"
       }
     })
     if (error) {
