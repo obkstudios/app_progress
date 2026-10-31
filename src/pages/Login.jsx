@@ -26,13 +26,14 @@ function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-
+    setLoginError("")
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
     })
     if (error) {
-      setLoginError(error.message)
+      console.log(error.message)
+      setLoginError("The password is wrong. Please try again.")
       return
     }
 
@@ -72,8 +73,10 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password" required />
         </div>
+
         {{ loginError } && <p>{loginError}</p>}
-        <button className="w-full flex justify-center transition-transform duration-150 ease-out hover:scale-[1.02] rounded-3xl px-4 py-2 mt-5 bg-amber-400 text-lg font-semiboldborder-2 text-white">
+
+        <button type="submit" className="w-full flex justify-center transition-transform duration-150 ease-out hover:scale-[1.02] rounded-3xl px-4 py-2 mt-5 bg-amber-400 text-lg font-semiboldborder-2 text-white">
           Log In
         </button>
       </form >
