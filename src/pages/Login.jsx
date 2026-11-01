@@ -2,12 +2,15 @@ import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { supabase } from "../lib/supabase"
 import { appName } from "../config"
+import { Eye, EyeOff } from "lucide-react"
 
 function Login() {
   const navigate = useNavigate()
   const [email, setEmail] = useState("")
   const [loginError, setLoginError] = useState("")
   const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     async function checkSession() {
@@ -27,17 +30,30 @@ function Login() {
   async function handleSubmit(e) {
     e.preventDefault()
     setLoginError("")
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password
-    })
-    if (error) {
-      console.log(error.message)
-      setLoginError("The password is wrong. Please try again.")
-      return
+    try {
+      setLoading(true)
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      })
+      if (error) {
+        console.log(error.message)
+        setLoginError("Invalid email or password. Please try again.")
+        return
+      }
+      navigate("/home")
+    }
+    catch (err) {
+      console.log("Something went wrong.")
+      console.log(err)
+      setLoginError("Unable to connect. Please check your internet connection and try again.")
+    }
+    finally {
+      setLoading(false)
     }
 
-    navigate("/home")
+
   }
 
   return (
@@ -66,7 +82,7 @@ function Login() {
         <div className="mb-4">
           <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="password">Password </label>
           <input
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
             value={password}
@@ -74,13 +90,27 @@ function Login() {
             placeholder="Password" required />
         </div>
 
-        {{ loginError } && <p>{loginError}</p>}
+        <div>
+          <button type="button">
+            <EyeOff size={20} />
+          </button>
+        </div>
 
-        <button type="submit" className="w-full flex justify-center transition-transform duration-150 ease-out hover:scale-[1.02] rounded-3xl px-4 py-2 mt-5 bg-amber-400 text-lg font-semiboldborder-2 text-white">
-          Log In
+        {loginError && <p className="text-red-600 text-sm mt-2">{loginError}</p>}
+        <div>
+          <p className="text-center mx-30 italic mt-10"> “Tell me and I forget, teach me and I may remember, involve me and I learn.”</p>
+          <p className="text-center italic font-semibold mb-15"> - Benjamin Franklin</p>
+        </div>
+        <button disabled={loading} type="submit" className="w-full flex justify-center items-center gap-2 transition-transform duration-150 ease-out hover:scale-[1.02] rounded-3xl px-4 py-2 mt-5 bg-amber-400 text-lg font-semibold border-2 text-white">
+          {
+            loading ? <><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>Logging In</> : "Log In"
+          }
         </button>
       </form >
     </div>
+
+
+
 
   )
 }
