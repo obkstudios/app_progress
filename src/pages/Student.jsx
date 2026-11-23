@@ -1,5 +1,13 @@
-function Student() {
-  return <h1>Student interface</h1>
+import { Outlet } from "react-router-dom"
+
+function DashboardLayout() {
+  return (
+    <div>
+      <header>Header</header>
+      <main>Main</main>
+      <nav>Navigation</nav>
+    </div>
+  )
 }
 
-export default Student
+export default DashboardLayout

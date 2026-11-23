@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import { programs } from "./programs"
 import { appName } from "../config"
 import { supabase } from "../lib/supabase"
+import { Eye, EyeOff, MailCheck } from "lucide-react"
 
 function SignUpForm() {
 
@@ -15,6 +16,7 @@ function SignUpForm() {
   const [program, setProgram] = useState("")
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [signUpMessage, setSignUpMessage] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
 
   useEffect(() => {
     async function fetchUni() {
@@ -76,6 +78,48 @@ function SignUpForm() {
     return programName.toLowerCase().includes(program.toLowerCase())
   })
 
+  if (signUpMessage) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#fdfaf3] px-4">
+        <div className="w-full max-w-md bg-white border border-[#1e1b4b]/10 rounded-3xl shadow-sm p-8 text-center">
+
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-50">
+            <MailCheck size={40} className="text-green-600" />
+          </div>
+
+          <h1 className="text-2xl font-bold text-[#1e1b4b] mb-3">
+            Check your email!
+          </h1>
+
+          <p className="text-gray-600 mb-2">
+            We've sent a confirmation link to
+          </p>
+
+          <p className="font-semibold text-[#1e1b4b] break-all mb-5">
+            {email}
+          </p>
+
+          <p className="text-gray-600 text-sm leading-relaxed mb-8">
+            Click the confirmation link in your email to verify
+            your account and start using {appName}.
+          </p>
+
+          <Link
+            to="/login"
+            className="block w-full rounded-3xl bg-amber-400 px-4 py-3 font-semibold text-[#1e1b4b] hover:bg-amber-500 transition-colors"
+          >
+            Go to Log In
+          </Link>
+
+          <p className="mt-6 text-sm text-gray-500">
+            Didn't receive the email? Check your spam or junk folder.
+          </p>
+
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex justify-center items-center min-h-screen  bg-[#fdfaf3] ">
       <form onSubmit={handleSubmit} className="w-full max-w-2xl rounded-4xl bg-white border border-[#1e1b4b]/10 p-8 shadow-sm">
@@ -84,7 +128,6 @@ function SignUpForm() {
         <div className="m-5">
           <h1 className="text-3xl font-bold text-[#1e1b4b]">Create your {appName} account</h1>
           <p className="text-sm italic mb-5 ">Tell us a little about yourself so we can organize your Lectify experience</p>
-          {signUpMessage && <p>{signUpMessage}</p>}
         </div>
 
         {/* forms */}
@@ -116,13 +159,22 @@ function SignUpForm() {
           {/* password */}
           <div className="mb-4">
             <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="password">Password </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password" required />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2 pr-12"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password" required />
+              <button
+                className="absolute right-4 top-1/2 -translate-y-1/2"
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
 
           {/* university */}

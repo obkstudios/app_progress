@@ -38,7 +38,7 @@ function Login() {
         password
       })
       if (error) {
-        console.log(error.message)
+        console.log("Login error: ", error)
         setLoginError("Invalid email or password. Please try again.")
         return
       }
@@ -78,28 +78,45 @@ function Login() {
             placeholder="example@gmail.com" required />
         </div>
 
+        <div>
+
+        </div>
+
         {/* password */}
         <div className="mb-4">
           <label className="block text-lg font-semibold text-[#1e1b4b]" htmlFor="password">Password </label>
-          <input
-            type={showPassword ? "text" : "password"}
-            id="password"
-            className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password" required />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              className=" border-[#1e1b4b]/50 border-2 w-full rounded-3xl px-4 py-2 pr-12"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password" required />
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2"
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
         </div>
 
-        <div>
-          <button type="button">
-            <EyeOff size={20} />
-          </button>
-        </div>
+
 
         {loginError && <p className="text-red-600 text-sm mt-2">{loginError}</p>}
         <div>
-          <p className="text-center mx-30 italic mt-10"> “Tell me and I forget, teach me and I may remember, involve me and I learn.”</p>
-          <p className="text-center italic font-semibold mb-15"> - Benjamin Franklin</p>
+          <blockquote className="my-8 border-l-4 border-amber-400 pl-4 pr-2">
+            <p className="text-center text-sm sm:text-base italic leading-relaxed text-gray-600">
+              “Tell me and I forget, teach me and I may remember,
+              involve me and I learn.”
+            </p>
+
+            <footer className="mt-3 text-right text-sm font-medium text-[#1e1b4b]">
+              — Benjamin Franklin
+            </footer>
+          </blockquote>
         </div>
         <button disabled={loading} type="submit" className="w-full flex justify-center items-center gap-2 transition-transform duration-150 ease-out hover:scale-[1.02] rounded-3xl px-4 py-2 mt-5 bg-amber-400 text-lg font-semibold border-2 text-white">
           {
